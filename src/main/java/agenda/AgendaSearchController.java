@@ -1,39 +1,40 @@
 package agenda;
 
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.util.Collection;
 
-public class AgendaAddController implements ActionListener {
+public class AgendaSearchController  implements ActionListener {
     private Agenda agenda;
     private JFrame janelaPrincipal;
 
-    public AgendaAddController(Agenda agenda, JFrame janela) {
+    public AgendaSearchController(Agenda agenda, JFrame janela) {
         this.agenda = agenda;
         this.janelaPrincipal = janela;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String nome = JOptionPane.showInputDialog(janelaPrincipal,
-                "Qual o nome do aniversariante");
+
 
         int dia = Integer.parseInt(JOptionPane.showInputDialog(janelaPrincipal,
                 "Qual o dia do mês em que nasceu? [1-31"));
 
         int mes = Integer.parseInt(JOptionPane.showInputDialog(janelaPrincipal,
                 "Qual o mês em que nasceu? [1-12]"));
-        boolean cadastrou = agenda.cadastraContato(nome, dia, mes);
-        if (cadastrou) {
+        Collection<Contato> aniversariantes = agenda.pesquisaAniversariantes(dia, mes);
+
+        if (aniversariantes.size() > 0) {
             JOptionPane.showInputDialog(janelaPrincipal,
-                    "Aniversariante Cadastrado");
+                    "Aniversariantes encontrados: ");
+            for (Contato c : aniversariantes) {
+                JOptionPane.showMessageDialog(janelaPrincipal, c.toString());
+            }
         } else {
             JOptionPane.showMessageDialog(janelaPrincipal,
-                    "Aniversariante não foi cadastrado. " +
-                            "Verifique se já não existia");
+                    "Não foi encontrado nenhum aniversariante nesta data");
         }
     }
 }
-
-
 

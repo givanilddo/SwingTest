@@ -10,7 +10,7 @@ public class AgendaGUIV3 extends JFrame{
     ImageIcon searchImg = new ImageIcon("./src/main/resources/search.png");
     ImageIcon removeImg = new ImageIcon("./src/main/resources/remove.png");
     JButton botaoAdicionar, botaoPesquisar, botaoRemover;
-    AgendaGUI agenda = new Agenda();
+    Agenda agenda = new AgendaGIL();
 
 
     public AgendaGUIV3() {
@@ -28,7 +28,7 @@ public class AgendaGUIV3 extends JFrame{
         botaoAdicionar = new JButton("Adicionar", addImg);
         botaoAdicionar.addActionListener(new AgendaAddController(agenda, this));
         botaoPesquisar = new JButton("Pesquisar", searchImg);
-        botaoPesquisar.addActionListener(new AgendaSeachController(agenda, this));
+        botaoPesquisar.addActionListener(new AgendaSearchController(agenda, this));
         botaoRemover = new JButton("Remover", removeImg);
         botaoRemover.addActionListener(new AgendaRemoveController(agenda, this));
 
